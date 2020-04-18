@@ -1,6 +1,6 @@
 ## Rest API Framewok
 
-Framework escrito en PHP para crear API Restfull basado en la idea de "no configuración". Sólo hay que configurar la base de datos y empezar a crear controllers y models con el nombre adecuado.
+Framework escrito en PHP para crear API Restfull al estilo FlightPHP o SlimPHP
 
 ### Conexión con base de datos
 
@@ -27,21 +27,19 @@ que correspondan.
    - .htaccess
 ```
 
-- _Core_: Ficheros del core del framework. Aquí se puede encontrar la clase Controller y Model de las que deben extender los controller y models que se creen nuevos.
+- _Core_: Ficheros del core del framework. Aquí se puede encontrar las siguientes clases:
 
-- _Controllers_: Carpeta con los controladores del framework
+  - Controller: Clase base para extender los demás controller que se creen
+  - Model: Clase base para extender todos los demás models que se creen
+  - Request: Clase que representa una petición
+  - Response: Clase que representa una respuesta
+  - Route: Clase que representa una ruta y permite matchear si coincide con la petición
+
+- _Controllers_: Carpeta con los controladores de la app
 
 - _Models_: Carpeta con los models para acceder a la bd y devolver datos al controlador
 
-- _index.php_: Dispatcher del framework que redirige las peticiones al controlador adecuado.
-  Ej.:
-
-  - La petición **"GET /"** -> intentará ejecutar el método **get** del **IndexController**
-
-  - La petición **"GET /products"** -> ejecutará el método get del ProductsController
-  - La petición **"GET /products/1"** -> ejecutará el método **get** del **ProductsController** con el parámetro **1**.
-
-  Es decir, no hace falta configurar ninguna petición, solo crear los controladores y models de cada llamada
+- _index.php_: Punto de entrada que importa la app, añade las rutas e inicializa la app
 
 - _.htaccess_: Fichero para activar y redirigir todas las llamadas al dispatcher. Es necesario que Apache tenga activado el mod_rewrite
 
@@ -59,5 +57,4 @@ que correspondan.
 ### Mejoras
 
 - Añadir sistema de templates (aunque en principio solo lo necesito para retornar objetos JSON)
-- Permitir configurar el controlador y método que se ejecuta por defecto
 - Añadir NotFoundController para redirigir las llamadas que no tienen el controlador creado
